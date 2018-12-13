@@ -56,4 +56,27 @@ The figure above shows the average stats per player per team across the observed
 
 
 ![nba_sheet4](https://user-images.githubusercontent.com/44894094/49857400-65d15080-fe2d-11e8-998f-dfeaecbed035.png)
-The box plot shown above shows the influence of average game score on wins and losses of a team. 
+The box plot shown above shows the influence of average game score on wins and losses of a team. We could say from the box plot that a low average game score has a larger impact on a team's loss than a high average game score has on a team's win. 
+
+
+![nba_sheet5](https://user-images.githubusercontent.com/44894094/49948421-656cae80-ff2e-11e8-8ce1-ae24c5a13197.png)
+
+The bar graph above shows the top 5 players in average points per game from 01/11/2018 to 27/11/2018.
+
+
+![nba_sheet6](https://user-images.githubusercontent.com/44894094/49950708-4b819a80-ff33-11e8-94fe-c3ec282e00bc.png)
+
+The bar graph above shows the top 5 players in average assists per game from 01/11/2018 to 27/11/2018.
+
+
+![nba_sheet7](https://user-images.githubusercontent.com/44894094/49950768-694eff80-ff33-11e8-99df-3f80d1d46aed.png)
+
+The bar graph above shows the top 5 players in average rebounds per game from 01/11/2018 to 27/11/2018.
+
+
+![nba_sheet8](https://user-images.githubusercontent.com/44894094/49950812-7bc93900-ff33-11e8-86d0-83c434362b57.png)
+
+The bar graph above shows the top 5 players in average steals per game from 01/11/2018 to 27/11/2018.
+
+
+
