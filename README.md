@@ -31,8 +31,34 @@ response = http.request('GET', url)
 ```
 class **urllib3.poolmanager.PoolManager** allows for arbitrary requests while transparently keeping track of necessary connection pools for you.  
 
+```
+soup = BeautifulSoup(response.data, 'html.parser')
+tags = soup.find_all("div", attrs={"class": "overthrow table_container", "id": "div_stats"})
+tags = tags[0].tbody.contents
+team_stats = []
+```
+Scrape the whole of webpage in url and remove unwanted content, leaving only the stats table we need. Also creating an empty list, "team_stats", to be used later on. 
 
+```
+for i in range(1, len(tags), 2):
+    contents = tags[i].contents
+    stats = []
+    name = contents[1].text
+    if name != "Rk":
+        stats.append(name)
+        for j in range(2, len(contents)):
+            stats.append(contents[j].text)
+        team_stats.append(stats)
 
+```
+Scraping the contents within the tags of the stats table. For each new name down the table, take their stats and add it to "team_stats" list created earlier. 
+
+```
+with open(str(day)+".csv", "w") as f:
+    writer = csv.writer(f)
+    writer.writerows(team_stats)
+```
+Once the stats has been scraped, open and append the data into an excel sheet. 
 
 ## Data Visualisation 
 <img src="nba.gif" width="1000" height="600" />
