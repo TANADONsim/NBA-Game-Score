@@ -10,7 +10,7 @@ As can be plainly seen, this statistic takes into account almost everything a pl
 ## The Data 
 We take a look at the NBA Daily Stat Leaders according to [https://www.basketball-reference.com](https://www.basketball-reference.com/friv/dailyleaders.fcgi?month=11&day=1&year=2018) from 01/11/2018 to 27/11/2018.
 
-## Building the code to get the data 
+## Building the Python code to get the data 
 ```
 import urllib3
 import csv
@@ -58,7 +58,43 @@ with open(str(day)+".csv", "w") as f:
     writer = csv.writer(f)
     writer.writerows(team_stats)
 ```
-Once the stats has been scraped, open and append the data into an excel sheet. 
+Once the stats has been scraped, open and append the data into a new excel sheet according to the current date. 
+
+```
+today = datetime.datetime.now().day
+scrape(today - 1)
+```
+When automated to get the stats daily, the code will scrape the data from the url's latest update once a day. Adjusted for the timezone difference between Singapore time and American time.
+
+## Using VBA to automate the process of updating the data in Excel
+```
+Set dataWb = Workbooks.Open("C:\Users\Tanadon Sim\Desktop\nba\data.xlsx")
+dataWb.Sheets(1).Rows("2:" & Rows.Count).ClearContents
+xStrPath = ("C:\Users\Tanadon Sim\Desktop\nba")
+If xStrPath = "" Then Exit Sub
+xFile = Dir(xStrPath & "\" & "*.csv")
+```
+Set the path for the VBA to the relevant folder. 
+
+```
+Do While xFile <> ""
+    Set wb = Workbooks.Open(xStrPath & "\" & xFile)
+    Set ws = wb.Worksheets(1)
+    ws.Columns(1).SpecialCells(xlBlanks).EntireRow.Delete
+    lastrow = ws.Cells(ws.Rows.Count, "A").End(xlUp).Row
+    Set currentws = dataWb.Worksheets(1)
+    startrow = currentws.Cells.SpecialCells(xlCellTypeLastCell).Offset(1, 0).Row
+    currentws.Range("B" & startrow & ":Y" & startrow + lastrow - 1).Value = ws.Range("A1:Y" & lastrow).Value
+    LArray = Split(xFile, ".")
+    currentws.Range("A" & startrow & ":A" & startrow + lastrow - 1).Value = LArray(0)
+    Application.DisplayAlerts = False
+    wb.Close False
+    xFile = Dir
+Loop
+```
+Appending the statistics in an excel file and formatted according to the table taken from the url.  
+
+
 
 ## Data Visualisation 
 <img src="nba.gif" width="1000" height="600" />
